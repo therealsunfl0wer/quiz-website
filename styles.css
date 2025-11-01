@@ -1,39 +1,39 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #333;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #333;
 }
 .sidebar {
-    width: 200px;
-    float: left;
-    padding: 10px;
-    background-color: #f0f0f0;
-    border-right: 1px solid #ccc;
+  width: 200px;
+  float: left;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-right: 1px solid #ccc;
 }
 .sidebar ul {
-    list-style-type: none;
-    padding: 0;
+  list-style-type: none;
+  padding: 0;
 }
 .topbar {
-    background-color: #444;
-    overflow: hidden;
+  background-color: #444;
+  overflow: hidden;
 }
 .topbar ul {
-    list-style-type: none;
-    margin: 0;
+  list-style-type: none;
+  margin: 0;
 }
 .content {
-    background-color: #444;
-    color: white;
+  background-color: #444;
+  color: white;
 }
 footer {
-    background-color: #444;
-    color: white;
-    text-align: left;
-    padding: 10px;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-    font-size: 10pt;
+  background-color: #444;
+  color: white;
+  text-align: left;
+  padding: 10px;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  font-size: 10pt;
 }
