@@ -1,39 +1,153 @@
-body {
+:root{
+  --bg: #333;
+  --panel: #555;
+  --muted: #666;
+  --muted-2: #777;
+  --text: #fff;
+  --primary: #28a745;
+  --correct: rgba(0,150,0,0.12);
+  --wrong: rgba(150,0,0,0.12);
+}
+
+/* Base layout */
+body{
   font-family: Arial, sans-serif;
+  font-size: 14pt;
   margin: 0;
   padding: 0;
-  background-color: #333;
+  background: var(--bg);
+  color: var(--text);
 }
-.sidebar {
-  width: 200px;
-  float: left;
-  padding: 10px;
-  background-color: #f0f0f0;
-  border-right: 1px solid #ccc;
+
+/* Quiz header */
+#quiz-title{ text-align:center; margin-top:20px }
+/* Test description styling */
+#quiz-description{ text-align:center; margin:6px 20px 18px; color: #ddd }
+
+/* Question container */
+.question{
+  margin:20px;
+  padding:10px;
+  border-radius:6px;
+  background:var(--panel);
 }
-.sidebar ul {
-  list-style-type: none;
-  padding: 0;
+.question.correct{ border-left:4px solid rgba(0,200,0,0.7); padding-left:8px; background: rgba(0,200,0,0.03) }
+.question.incorrect{ border-left:4px solid rgba(200,0,0,0.7); padding-left:8px; background: rgba(200,0,0,0.02) }
+
+/* Submit button */
+#submit-btn{
+  background:var(--primary);
+  color:var(--text);
+  border:none;
+  padding:10px 20px;
+  margin-left:20px;
+  font-size:16px;
+  cursor:pointer;
+  border-radius:6px;
 }
-.topbar {
-  background-color: #444;
-  overflow: hidden;
+
+/* Choice-row (variant B) - input (hidden) + label (styled as button) */
+
+.choice-row{ display:block; margin:8px 0 }
+.choice-row input{ position:absolute; opacity:0; width:0; height:0 }
+.choice-row label{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px 12px;
+  background:var(--muted);
+  color:var(--text);
+  border-radius:8px;
+  cursor:pointer;
+  transition: background .12s, transform .06s, box-shadow .12s;
+  width:100%;
+  box-sizing:border-box;
+  overflow-wrap: break-word;
 }
-.topbar ul {
-  list-style-type: none;
-  margin: 0;
+
+/* visual radio/checkbox indicator on the left */
+.choice-row label::before{
+  content: '';
+  flex: 0 0 20px;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  border:2px solid rgba(255,255,255,0.18);
+  background: transparent;
 }
-.content {
-  background-color: #444;
-  color: white;
+
+/* If input is checkbox, make it square */
+.choice-row input[type="checkbox"] + label::before{ border-radius:4px }
+
+/* Hover & keyboard focus */
+.choice-row label:hover,
+.choice-row input:focus + label,
+.choice-row input:focus-visible + label{ background:var(--muted-2); transform:translateY(-1px) }
+
+/* Checked / selected styling */
+.choice-row input:checked + label{ background:var(--primary); color:var(--text); box-shadow:0 4px 10px rgba(40,167,69,0.18) }
+.choice-row input:checked + label::before{ background:var(--text); border-color:var(--text) }
+
+/* Disabled */
+.choice-row input:disabled + label{ opacity:0.6; cursor:not-allowed }
+
+/* Correct / wrong highlights (more visible) */
+.choice-row label.choice-correct,
+label.choice-correct{ background: rgba(0,150,0,0.06); border:1px solid rgba(0,150,0,0.12) }
+.choice-row label.choice-chosen-correct{ background: rgba(0,180,0,0.10); border:1px solid rgba(0,150,0,0.18); box-shadow: 0 2px 6px rgba(0,150,0,0.04) }
+.choice-row label.choice-wrong,
+label.choice-wrong{ background: rgba(200,0,0,0.08); border:1px solid rgba(200,0,0,0.14); color: #fff0f0 }
+
+/* Make sure labels don't overflow their container */
+.question .choice-row{ max-width: 100% }
+
+/* Small responsive tweak */
+@media (max-width:600px){
+  .choice-row label{ display:block }
 }
-footer {
-  background-color: #444;
-  color: white;
-  text-align: left;
-  padding: 10px;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-  font-size: 10pt;
+
+/* ---- Index page layout ---- */
+.topbar{
+  background: linear-gradient(90deg,#444,#3a3a3a);
+  padding:10px 16px;
+  color: #fff;
+}
+.topbar a{ color: #fff; text-decoration:none; font-weight:600 }
+
+.layout{
+  display:flex;
+  gap:20px;
+  align-items:flex-start;
+  padding:18px 20px 80px; /* leave space for footer */
+}
+.sidebar{
+  width:220px;
+  background:#2f2f2f;
+  padding:14px;
+  border-radius:8px;
+}
+.sidebar p{ margin:0 0 8px; color:#ddd }
+.sidebar ul{ padding:0; margin:0 0 12px; list-style:none }
+.sidebar li{ margin:8px 0 }
+.sidebar a{ color:var(--text); text-decoration:none }
+.sidebar button{
+  appearance:none; border:none; background:var(--primary); color:#fff; padding:8px 10px; border-radius:6px; cursor:pointer; width:100%;
+}
+
+.content{
+  flex:1;
+  background:transparent;
+}
+.content h1{ margin-top:6px; font-size:22pt }
+.content p{ color:#ddd }
+
+/* Quiz list links */
+#quizList a{ display:block; padding:8px 10px; border-radius:6px; background:rgba(255,255,255,0.03); color:var(--text); text-decoration:none }
+#quizList a:hover{ background:rgba(255,255,255,0.06) }
+
+/* Footer adjustments so it doesn't cover content on small screens */
+@media (max-width:600px){
+  .layout{ flex-direction:column }
+  .sidebar{ width:auto }
+  footer{ position:static }
 }
