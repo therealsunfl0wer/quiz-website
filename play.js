@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
         <label for="q${index}_c${i}">${choice}</label>
       </div>
     `).join('')}
-      <hr>
     `;
 
     questionsDiv.appendChild(qDiv);
@@ -76,7 +75,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const questionDiv = document.querySelectorAll('.question')[index];
       const questionIsCorrect = correctArr.length === selectedArr.length && correctArr.every((v, i) => v === selectedArr[i]);
-      if (questionDiv) questionDiv.classList.add(questionIsCorrect ? 'correct' : 'incorrect');
+
+      // Determine if user selected any correct or wrong choices
+      const hasAnyCorrectSelected = selectedArr.some((s) => correctArr.includes(s));
+      const hasAnyWrongSelected = selectedArr.some((s) => !correctArr.includes(s));
+
+      // Decide question-level class:
+      // - exact match => correct
+      // - multiple type with at least one correct selected => partial (yellow)
+      // - otherwise => incorrect (red)
+      if (questionDiv) {
+        if (questionIsCorrect) {
+          questionDiv.classList.add('correct');
+        } else if (q.type === 'multiple' && hasAnyCorrectSelected) {
+          questionDiv.classList.add('partial');
+        } else {
+          questionDiv.classList.add('incorrect');
+        }
+      }
 
       // Highlight each choice label
       if (Array.isArray(q.choices)) {
@@ -86,6 +102,8 @@ document.addEventListener("DOMContentLoaded", () => {
           const isCorrectChoice = correctArr.includes(i);
           const isSelected = input ? input.checked : false;
           if (label) {
+            // mark selected for persistent styling independent of input state
+            if (isSelected) label.classList.add('selected');
             if (isCorrectChoice) label.classList.add('choice-correct');
             if (isSelected && !isCorrectChoice) label.classList.add('choice-wrong');
             if (isSelected && isCorrectChoice) label.classList.add('choice-chosen-correct');

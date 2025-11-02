@@ -5,7 +5,7 @@
   --muted-2: #777;
   --text: #fff;
   --primary: #28a745;
-  --correct: rgba(0,150,0,0.12);
+  --correct: rgba(0, 150, 0, 0.12);
   --wrong: rgba(150,0,0,0.12);
 }
 
@@ -33,6 +33,8 @@ body{
 }
 .question.correct{ border-left:4px solid rgba(0,200,0,0.7); padding-left:8px; background: rgba(0,200,0,0.03) }
 .question.incorrect{ border-left:4px solid rgba(200,0,0,0.7); padding-left:8px; background: rgba(200,0,0,0.02) }
+/* Partial correct (some correct selected in multi-select) */
+.question.partial{ border-left:4px solid rgba(255,200,0,0.9); padding-left:8px; background: rgba(255,200,0,0.04) }
 
 /* Submit button */
 #submit-btn{
@@ -46,7 +48,7 @@ body{
   border-radius:6px;
 }
 
-/* Choice-row (variant B) - input (hidden) + label (styled as button) */
+/* Choice-row */
 
 .choice-row{ display:block; margin:8px 0 }
 .choice-row input{ position:absolute; opacity:0; width:0; height:0 }
@@ -88,18 +90,55 @@ body{
 .choice-row input:checked + label{ background:var(--primary); color:var(--text); box-shadow:0 4px 10px rgba(40,167,69,0.18) }
 .choice-row input:checked + label::before{ background:var(--text); border-color:var(--text) }
 
-/* Disabled */
-.choice-row input:disabled + label{ opacity:0.6; cursor:not-allowed }
+.question .choice-row{ max-width: 100% }
+/* Ensure selected-but-wrong overrides the checked green state */
+.question .choice-row input:checked + label.choice-wrong,
+.question .choice-row input:checked + label.choice-wrong::before{
+  background: rgba(200,0,0,0.8);
+  border-color: rgba(200,0,0,0.22);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(200,0,0,0.12);
+}
 
-/* Correct / wrong highlights (more visible) */
+/* Selected and correct should also have a clear visual (overrides green if needed) */
+.question .choice-row input:checked + label.choice-chosen-correct,
+.question .choice-row input:checked + label.choice-chosen-correct::before{
+  background: rgba(0,180,0,0.8);
+  border-color: rgba(0,150,0,0.25);
+  color: var(--text);
+}
+
+/* Disabled */
+.choice-row input:disabled:not(:checked) + label{ opacity:0.6 }
+.choice-row input:disabled + label{ cursor:not-allowed }
+.question .choice-row input:disabled + label.choice-wrong,
+.question .choice-row input:disabled + label.choice-chosen-correct,
+.question .choice-row input:disabled + label.choice-correct {
+  opacity: 1;
+}
+
+/* Persistent selected class */
+.choice-row label.selected{ opacity:1; box-shadow: 0 4px 10px rgba(0,0,0,0.12); }
+.choice-row label.selected::before{ transform: scale(1.02) }
+.choice-row label.selected.choice-wrong{ box-shadow: 0 4px 12px rgba(200,0,0,0.14) }
+.choice-row label.selected.choice-chosen-correct{ box-shadow: 0 4px 12px rgba(0,150,0,0.12) }
+
+.question .choice-row label.selected:not(.choice-wrong):not(.choice-chosen-correct){
+  background: var(--primary);
+  color: var(--text);
+  box-shadow: 0 4px 10px rgba(40,167,69,0.18);
+}
+.question .choice-row label.selected:not(.choice-wrong):not(.choice-chosen-correct)::before{
+  background: var(--text);
+  border-color: var(--text);
+}
+
+/* Correct / wrong highlights */
 .choice-row label.choice-correct,
 label.choice-correct{ background: rgba(0,150,0,0.06); border:1px solid rgba(0,150,0,0.12) }
 .choice-row label.choice-chosen-correct{ background: rgba(0,180,0,0.10); border:1px solid rgba(0,150,0,0.18); box-shadow: 0 2px 6px rgba(0,150,0,0.04) }
 .choice-row label.choice-wrong,
-label.choice-wrong{ background: rgba(200,0,0,0.08); border:1px solid rgba(200,0,0,0.14); color: #fff0f0 }
-
-/* Make sure labels don't overflow their container */
-.question .choice-row{ max-width: 100% }
+label.choice-wrong{ background: rgba(200,0,0,0.14); border:1px solid rgba(200,0,0,0.22); color: #fff0f0; box-shadow: 0 2px 6px rgba(200,0,0,0.06) }
 
 /* Small responsive tweak */
 @media (max-width:600px){
