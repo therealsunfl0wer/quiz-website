@@ -1,75 +1,71 @@
-import { quizzes, gradeQuiz } from "./quizzes.js";
+document.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  const quizId = params.get("id");
 
-// 1. Зчитуємо id тесту з URL
-const params = new URLSearchParams(window.location.search);
-const quizId = params.get("id");
-const quiz = quizzes[quizId];
+  const quizzes = JSON.parse(localStorage.getItem("quizzes")) || [];
+  const quiz = quizzes[quizId];
 
-// 2. Якщо тест не знайдено
-if (!quiz) {
-  document.body.innerHTML = `<h2>Quiz not found.</h2>`;
-} else {
-  // 3. Виводимо назву та опис
+  if (!quiz) {
+    document.body.innerHTML = `<h2>Quiz not found.</h2>`;
+    return;
+  }
+
   document.getElementById("quiz-title").textContent = quiz.title;
   document.getElementById("quiz-description").textContent = quiz.description;
 
   const questionsDiv = document.getElementById("questions");
 
-  // 4. Малюємо всі питання
-  quiz.questions.forEach((q) => {
+  quiz.questions.forEach((q, index) => {
     const qDiv = document.createElement("div");
+    qDiv.classList.add("question");
+    const inputType = q.type === "multiple" ? "checkbox" : "radio";
+
     qDiv.innerHTML = `
-      <h3>${q.text}</h3>
+      <h3>${index + 1}. ${q.text}</h3>
       ${q.choices
         .map(
           (choice, i) => `
         <label>
-          <input type="${
-            q.type === "multiple" ? "checkbox" : "radio"
-          }" name="${q.id}" value="${i}"> ${choice}
-        </label><br>`
+          <input type="${inputType}" name="q${index}" value="${i}"> ${choice}
+        </label><br>`,
         )
         .join("")}
       <hr>
     `;
+
     questionsDiv.appendChild(qDiv);
   });
 
-  // 5. Обробка кнопки Submit
   document.getElementById("submit-btn").addEventListener("click", () => {
-    const answers = {};
-    quiz.questions.forEach((q) => {
+    let score = 0;
+
+    quiz.questions.forEach((q, index) => {
       const selected = [
-        ...document.querySelectorAll(`input[name="${q.id}"]:checked`),
-      ].map((el) => Number(el.value));
-      answers[q.id] = selected;
+        ...document.querySelectorAll(`input[name="q${index}"]:checked`),
+      ].map((el) => parseInt(el.value));
+
+      const correct = q.correct.sort().join(",");
+      const chosen = selected.sort().join(",");
+      if (correct === chosen) {
+        score += q.points || 1;
+      }
     });
 
-    // 6. Перевіряємо результати
-    const result = gradeQuiz(quiz, answers);
-    document.getElementById(
-      "result"
-    ).innerHTML = `<h2>Score: ${result.score}/${result.maxScore}</h2>`;
+    const maxScore = quiz.questions.reduce(
+      (sum, q) => sum + (q.points || 1),
+      0,
+    );
 
-    // 7. Підсвічуємо правильні/неправильні
-    result.details.forEach((d) => {
-      const qInputs = document.querySelectorAll(`input[name="${d.questionId}"]`);
-      qInputs.forEach((input, i) => {
-        if (d.correct.includes(i))
-          input.parentElement.style.color = "green";
-        else if (d.submitted.includes(i))
-          input.parentElement.style.color = "red";
-      });
-    });
+    document.getElementById("result").innerHTML =
+      `<h2>Score: ${score}/${maxScore}</h2>`;
 
-    // 8. Зберігаємо у localStorage результати
-    const collection = JSON.parse(localStorage.getItem("quizResults") || "{}");
-    collection[quiz.id] = {
+    const results = JSON.parse(localStorage.getItem("quizResults")) || [];
+    results.push({
       title: quiz.title,
-      score: result.score,
-      max: result.maxScore,
+      score,
+      maxScore,
       date: new Date().toISOString(),
-    };
-    localStorage.setItem("quizResults", JSON.stringify(collection));
+    });
+    localStorage.setItem("quizResults", JSON.stringify(results));
   });
-}
+});

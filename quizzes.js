@@ -67,14 +67,14 @@ export function gradeQuiz(quiz, answers) {
     const submitted = Array.isArray(answers?.[q.id]) ? answers[q.id] : [];
     const correctSet = new Set(q.correct);
     const submittedSet = new Set(
-      submitted.map((i) => Number(i)).filter((n) => Number.isInteger(n))
+      submitted.map((i) => Number(i)).filter((n) => Number.isInteger(n)),
     );
 
     const correctSelectedCount = [...submittedSet].filter((i) =>
-      correctSet.has(i)
+      correctSet.has(i),
     ).length;
     const incorrectSelectedCount = [...submittedSet].filter(
-      (i) => !correctSet.has(i)
+      (i) => !correctSet.has(i),
     ).length;
     const totalCorrectCount = q.correct.length;
 
@@ -89,7 +89,7 @@ export function gradeQuiz(quiz, answers) {
       const frac = Math.max(
         0,
         (correctSelectedCount - incorrectSelectedCount) /
-          Math.max(1, totalCorrectCount)
+          Math.max(1, totalCorrectCount),
       );
       earned = Math.round(frac * q.points * 100) / 100;
     } else {
