@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const quizId = params.get("id");
 
   const quizzes = JSON.parse(localStorage.getItem("quizzes")) || [];
-  const quiz = quizzes[quizId];
+  const quiz = quizzes.find(q => q.id === quizId);
 
   if (!quiz) {
     document.body.innerHTML = `<h2>Quiz not found.</h2>`;

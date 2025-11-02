@@ -1,6 +1,6 @@
 // === 1. Колекція всіх тестів ===
-export const quizzes = {
-  quiz_example_1: {
+export const initialQuizzes = [
+  {
     id: "quiz_example_1",
     title: "Simple Example Quiz",
     description:
@@ -33,7 +33,7 @@ export const quizzes = {
     ],
   },
 
-  quiz_math: {
+  {
     id: "quiz_math",
     title: "Math Basics",
     description: "Simple math test",
@@ -56,7 +56,10 @@ export const quizzes = {
       },
     ],
   },
-};
+];
+
+if (!localStorage.getItem("quizzes")) { localStorage.setItem("quizzes", JSON.stringify(initialQuizzes)); }
+
 
 // === 2. Функція перевірки результатів ===
 export function gradeQuiz(quiz, answers) {

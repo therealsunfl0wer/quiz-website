@@ -156,6 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const quiz = {
+      id: `quiz_${Date.now()}`,
       title,
       description,
       questions: questionsElements.map((q, i) => {
