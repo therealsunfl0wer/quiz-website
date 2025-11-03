@@ -271,30 +271,39 @@ footer {
     border-radius: 6px;
 }
 
-#resultsList .user-answer {
+.stylingBlock {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.04);
+  padding: 14px;
+  margin-left: 200px;
+  margin-right: 200px;
+  border-radius: 8px;
+}
+
+.user-answer {
     background: rgba(200,0,0,0.14);
     border: 1px solid rgba(200,0,0,0.22);
     color: #fff0f0;
 }
 
-#resultsList .correct-answer {
+.correct-answer {
     background: rgba(0,150,0,0.06);
     border: 1px solid rgba(0,150,0,0.12);
     color: #f0fff0;
 }
 
-#resultsList .question {
+.question {
     color: var(--text);
     font-size: 16px;
     margin: 20px 0 10px 0;
     font-weight: bold;
 }
-#resultsList .quiz-title {
+.quiz-title {
     font-size: 18pt;
     color: var(--text);
     margin: 0 0 8px;
 }
-#resultsList .quiz-score {
+.quiz-score {
     font-size: 14pt;
     color: #ddd;
 }

@@ -22,6 +22,7 @@ results.forEach((result) => {
         const answersContainer = document.createElement('ul');
         quizIncorrect.forEach((answer) => {
             const block = document.createElement('div');
+            block.className = 'stylingBlock';
             block.innerHTML = `
                 <h3 class="question">${answer.question}</h3>
                 <p class="user-answer">Your answer: ${answer.userAnswer}</p>
