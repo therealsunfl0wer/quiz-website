@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="create.css"></link>
+
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("quizForm");
   const container = document.getElementById("questionsContainer");
@@ -10,41 +12,29 @@ document.addEventListener("DOMContentLoaded", () => {
     q.style = "background:#333; padding:10px; border-radius:8px; margin-top:10px;";
 
     q.innerHTML = `
-      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
-        <label style="font-weight:bold;">Q${count}:</label>
-        <input type="text" class="questionText" placeholder="Enter question" required
-          style="flex:2;min-width:150px;padding:5px;border:none;border-radius:5px;background:#3a3a3a;color:#fff;">
-        
-        <label>Type:</label>
-        <select class="questionType"
-          style="flex:1;min-width:120px;padding:5px;border:none;border-radius:5px;background:#3a3a3a;color:#fff;">
-          <option value="single">Single</option>
-          <option value="multiple">Multiple</option>
-          <option value="boolean">True/False</option>
-        </select>
+  <div class="question-header">
+    <label class="question-label">Q${count}:</label>
+    <input type="text" class="questionText" placeholder="Enter question" required>
 
-        <label>Points:</label>
-        <input type="number" class="questionPoints" value="1" min="1"
-          style="width:60px;padding:5px;border:none;border-radius:5px;background:#3a3a3a;color:#fff;">
+    <label>Type:</label>
+    <select class="questionType">
+      <option value="single">Single</option>
+      <option value="multiple">Multiple</option>
+      <option value="boolean">True/False</option>
+    </select>
 
-        <button type="button" class="removeQuestionBtn"
-          style="margin-left:auto;background:#ff6b6b;color:white;border:none;padding:5px 10px;border-radius:5px;cursor:pointer;">
-          Remove
-        </button>
-      </div>
+    <label>Points:</label>
+    <input type="number" class="questionPoints" value="1" min="1">
 
-      <div class="optionsSection" style="margin-top:10px;">
-        <div class="optionsContainer"></div>
-        <button type="button" class="addOptionBtn"
-          style="margin-top:8px;background:#70ff98;color:#1e1e1e;border:none;padding:5px 10px;border-radius:5px;cursor:pointer;">
-          + Add Option
-        </button>
-        <div class="errorMsg" style="color:#ff6b6b;margin-top:5px;display:none;">
-          Select at least one correct answer.
-        </div>
-      </div>
-    `;
+    <button type="button" class="removeQuestionBtn">Remove</button>
+  </div>
 
+  <div class="optionsSection">
+    <div class="optionsContainer"></div>
+    <button type="button" class="addOptionBtn">+ Add Option</button>
+    <div class="errorMsg">Select at least one correct answer.</div>
+  </div>
+`;
     const typeSelect = q.querySelector(".questionType");
     const optionsContainer = q.querySelector(".optionsContainer");
     const addOptionBtn = q.querySelector(".addOptionBtn");

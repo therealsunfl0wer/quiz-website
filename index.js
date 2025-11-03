@@ -1,4 +1,4 @@
-import { initialQuizzes } from './quizzes.js';
+import { initialQuizzes } from "./quizzes.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const quizList = document.getElementById("quizList");
