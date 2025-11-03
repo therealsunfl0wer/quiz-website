@@ -184,6 +184,54 @@ label.choice-wrong{ background: rgba(200,0,0,0.14); border:1px solid rgba(200,0,
 #quizList a{ display:block; padding:8px 10px; border-radius:6px; background:rgba(255,255,255,0.03); color:var(--text); text-decoration:none }
 #quizList a:hover{ background:rgba(255,255,255,0.06) }
 
+#resultsList { padding: 0; margin: 0 }
+#resultsList > li {
+    background: var(--panel);
+    margin: 16px 0;
+    padding: 16px;
+    border-radius: 8px;
+    list-style: none;
+}
+#resultsList > li:first-child { margin-top: 0 }
+#resultsList ul {
+    margin: 12px 0 0;
+    padding: 0;
+}
+
+#resultsList p {
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 6px;
+}
+
+#resultsList .user-answer {
+    background: rgba(200,0,0,0.14);
+    border: 1px solid rgba(200,0,0,0.22);
+    color: #fff0f0;
+}
+
+#resultsList .correct-answer {
+    background: rgba(0,150,0,0.06);
+    border: 1px solid rgba(0,150,0,0.12);
+    color: #f0fff0;
+}
+
+#resultsList .question {
+    color: var(--text);
+    font-size: 16px;
+    margin: 20px 0 10px 0;
+    font-weight: bold;
+}
+#resultsList .quiz-title {
+    font-size: 18pt;
+    color: var(--text);
+    margin: 0 0 8px;
+}
+#resultsList .quiz-score {
+    font-size: 14pt;
+    color: #ddd;
+}
+
 /* Footer adjustments so it doesn't cover content on small screens */
 @media (max-width:600px){
   .layout{ flex-direction:column }

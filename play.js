@@ -68,8 +68,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     localStorage.setItem("quizResults", JSON.stringify(results));
 
-    // Mark correct / incorrect choices per question
-    quiz.questions.forEach((q, index) => {
+  let incorrect = JSON.parse(localStorage.getItem("incorrectAnswers")) || [];
+
+  // Mark correct / incorrect choices per question
+  quiz.questions.forEach((q, index) => {
       const correctArr = Array.isArray(q.correct) ? [...q.correct].sort((a, b) => a - b) : [];
       const selectedArr = [...document.querySelectorAll(`input[name="q${index}"]:checked`)].map((el) => Number(el.value)).sort((a, b) => a - b);
 
@@ -93,6 +95,33 @@ document.addEventListener("DOMContentLoaded", () => {
           questionDiv.classList.add('incorrect');
         }
       }
+
+      if (!questionIsCorrect) {
+        let userAnswerText;
+        let correctAnswerText;
+
+        if (selectedArr.length > 0) {
+          userAnswerText = selectedArr.map(i => q.choices[i]).join(', ');
+        } else {
+          userAnswerText = '(no answer)';
+        }
+
+        if (Array.isArray(q.correct)) {
+          correctAnswerText = q.correct.map(i => q.choices[i]).join(', ');
+        } else {
+          correctAnswerText = '(no answer)';
+        }
+
+        incorrect.push({
+          quizId: quizId,
+          quizTitle: quiz.title,
+          question: q.text,
+          userAnswer: userAnswerText,
+          correctAnswer: correctAnswerText
+        });
+      }
+
+      localStorage.setItem("incorrectAnswers", JSON.stringify(incorrect));
 
       // Highlight each choice label
       if (Array.isArray(q.choices)) {
