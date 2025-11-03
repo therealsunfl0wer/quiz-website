@@ -58,8 +58,9 @@ export const initialQuizzes = [
   },
 ];
 
-if (!localStorage.getItem("quizzes")) { localStorage.setItem("quizzes", JSON.stringify(initialQuizzes)); }
-
+if (!localStorage.getItem("quizzes")) {
+  localStorage.setItem("quizzes", JSON.stringify(initialQuizzes));
+}
 
 // === 2. Функція перевірки результатів ===
 export function gradeQuiz(quiz, answers) {

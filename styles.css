@@ -1,17 +1,19 @@
 :root{
-  --bg: #333;
-  --panel: #555;
-  --muted: #666;
+  --bg: #2a2d2e;
+  --panel: #3c3f40;
+  --muted: #dfdfdf;
   --muted-2: #777;
   --text: #fff;
-  --primary: #28a745;
+  --primary: #078600;
+  --primary-hover: #019101;
   --correct: rgba(0, 150, 0, 0.12);
   --wrong: rgba(150,0,0,0.12);
 }
 
 /* Base layout */
 body{
-  font-family: Arial, sans-serif;
+  flex: 1;
+  font-family: "Segoe UI", sans-serif;
   font-size: 14pt;
   margin: 0;
   padding: 0;
@@ -147,38 +149,103 @@ label.choice-wrong{ background: rgba(200,0,0,0.14); border:1px solid rgba(200,0,
 
 /* ---- Index page layout ---- */
 .topbar{
-  background: linear-gradient(90deg,#444,#3a3a3a);
+  background: var(--panel);
   padding:10px 16px;
-  color: #fff;
+  color: var(--text);
 }
-.topbar a{ color: #fff; text-decoration:none; font-weight:600 }
+.topbar a{ color: var(--text); text-decoration:none; font-weight:600; margin-right:20px }
 
 .layout{
   display:flex;
   gap:20px;
-  align-items:flex-start;
-  padding:18px 20px 80px; /* leave space for footer */
-}
-.sidebar{
-  width:220px;
-  background:#2f2f2f;
-  padding:14px;
-  border-radius:8px;
-}
-.sidebar p{ margin:0 0 8px; color:#ddd }
-.sidebar ul{ padding:0; margin:0 0 12px; list-style:none }
-.sidebar li{ margin:8px 0 }
-.sidebar a{ color:var(--text); text-decoration:none }
-.sidebar button{
-  appearance:none; border:none; background:var(--primary); color:#fff; padding:8px 10px; border-radius:6px; cursor:pointer; width:100%;
+  align-items:center;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 75px;
 }
 
-.content{
-  flex:1;
-  background:transparent;
+.panel{
+  width:320px;
+  height: 335px;
+  background:#212424;
+  padding:14px;
+  border-radius:25px;
+  overflow-y: auto;
 }
-.content h1{ margin-top:6px; font-size:22pt }
-.content p{ color:#ddd }
+.panel p{ margin:0 0 8px; color: var(--muted); font-size: 15pt; }
+.panel ul{ padding:0; margin:0 0 12px; list-style:none }
+.panel li{ margin:8px 0 }
+.panel a{ color:var(--text); text-decoration:none }
+
+.other-panel {
+  width: 600px;
+  height: 335px;
+  background: #212424;
+  padding: 14px;
+  border-radius: 25px;
+  margin-left: 50px;
+}
+.other-panel p { margin: 0 0 8px; color: var(--muted); margin-bottom: 50px; font-size: 15pt; }
+
+
+.other-button button {
+  appearance: none;
+  border: none;
+  background: var(--primary);
+  color: var(--text);
+  padding: 8px 10px;
+  border-radius: 25px;
+  cursor: pointer;
+  width: 80%;
+  height: 50px;
+  margin-bottom: 20px;
+  font-size: 13pt;
+}
+
+.header{
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  background:transparent;
+  text-align: center;
+}
+.header h1{ margin-top:30px; font-size:22pt; margin-right: 50px; margin-left: 50px}
+.header p{ 
+  color: var(--muted); 
+  margin-right: 40px; 
+  margin-left: 10px; 
+  background: #212424;
+  border-radius: 12px;
+  margin-top: 25px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.logo{ 
+  width: 85px; 
+  height: 85px; 
+  border-radius: 12px; 
+  margin-top: 25px; 
+  margin-right: 20px; 
+  display: fixed;
+}
+
+main{
+  flex: 1;
+  box-sizing: border-box;
+}
+
+footer {
+  margin-top: 60px;
+  padding: 14px 20px;
+  font-size: 12pt;
+  color: var(--muted);
+  position: fixed;
+}
 
 /* Quiz list links */
 #quizList a{ display:block; padding:8px 10px; border-radius:6px; background:rgba(255,255,255,0.03); color:var(--text); text-decoration:none }
@@ -237,4 +304,75 @@ label.choice-wrong{ background: rgba(200,0,0,0.14); border:1px solid rgba(200,0,
   .layout{ flex-direction:column }
   .sidebar{ width:auto }
   footer{ position:static }
+}
+
+.question-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.question-label {
+  font-weight: bold;
+}
+
+.questionText {
+  flex: 2;
+  min-width: 150px;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  background: #3a3a3a;
+  color: #fff;
+}
+
+.questionType {
+  flex: 1;
+  min-width: 120px;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  background: #3a3a3a;
+  color: #fff;
+}
+
+.questionPoints {
+  width: 60px;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  background: #3a3a3a;
+  color: #fff;
+}
+
+.removeQuestionBtn {
+  margin-left: auto;
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.optionsSection {
+  margin-top: 10px;
+}
+
+.addOptionBtn {
+  margin-top: 8px;
+  background: #70ff98;
+  color: #1e1e1e;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+.errorMsg {
+  color: #ff6b6b;
+  margin-top: 5px;
+  display: none;
 }
