@@ -190,3 +190,74 @@ label.choice-wrong{ background: rgba(200,0,0,0.14); border:1px solid rgba(200,0,
   .sidebar{ width:auto }
   footer{ position:static }
 }
+
+.question-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.question-label {
+  font-weight: bold;
+}
+
+.questionText {
+  flex: 2;
+  min-width: 150px;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  background: #3a3a3a;
+  color: #fff;
+}
+
+.questionType {
+  flex: 1;
+  min-width: 120px;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  background: #3a3a3a;
+  color: #fff;
+}
+
+.questionPoints {
+  width: 60px;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  background: #3a3a3a;
+  color: #fff;
+}
+
+.removeQuestionBtn {
+  margin-left: auto;
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.optionsSection {
+  margin-top: 10px;
+}
+
+.addOptionBtn {
+  margin-top: 8px;
+  background: #70ff98;
+  color: #1e1e1e;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+.errorMsg {
+  color: #ff6b6b;
+  margin-top: 5px;
+  display: none;
+}
