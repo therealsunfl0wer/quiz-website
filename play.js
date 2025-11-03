@@ -44,6 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("submit-btn").addEventListener("click", () => {
     let score = 0;
 
+    const playID = `play_${Date.now()}`;
+
     quiz.questions.forEach((q, index) => {
       const selected = [
         ...document.querySelectorAll(`input[name="q${index}"]:checked`),
@@ -74,6 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const results = JSON.parse(localStorage.getItem("quizResults")) || [];
     results.push({
       quizId: quizId,
+      playID: playID,
       title: quiz.title,
       score,
       maxScore,
@@ -133,6 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         incorrect.push({
           quizId: quizId,
+          playID: playID,
           quizTitle: quiz.title,
           question: q.text,
           userAnswer: userAnswerText,
