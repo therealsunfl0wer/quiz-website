@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="create.css"></link>
-
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("quizForm");
   const container = document.getElementById("questionsContainer");
@@ -11,30 +9,32 @@ document.addEventListener("DOMContentLoaded", () => {
     q.className = "question";
     q.style = "background:#333; padding:10px; border-radius:8px; margin-top:10px;";
 
+    // ✅ FIXED: use backticks for multiline string
     q.innerHTML = `
-  <div class="question-header">
-    <label class="question-label">Q${count}:</label>
-    <input type="text" class="questionText" placeholder="Enter question" required>
+      <div class="question-header">
+        <label class="question-label">Q${count}:</label>
+        <input type="text" class="questionText" placeholder="Enter question" required>
 
-    <label>Type:</label>
-    <select class="questionType">
-      <option value="single">Single</option>
-      <option value="multiple">Multiple</option>
-      <option value="boolean">True/False</option>
-    </select>
+        <label>Type:</label>
+        <select class="questionType">
+          <option value="single">Single</option>
+          <option value="multiple">Multiple</option>
+          <option value="boolean">True/False</option>
+        </select>
 
-    <label>Points:</label>
-    <input type="number" class="questionPoints" value="1" min="1">
+        <label>Points:</label>
+        <input type="number" class="questionPoints" value="1" min="1">
 
-    <button type="button" class="removeQuestionBtn">Remove</button>
-  </div>
+        <button type="button" class="removeQuestionBtn">Remove</button>
+      </div>
 
-  <div class="optionsSection">
-    <div class="optionsContainer"></div>
-    <button type="button" class="addOptionBtn">+ Add Option</button>
-    <div class="errorMsg">Select at least one correct answer.</div>
-  </div>
-`;
+      <div class="optionsSection">
+        <div class="optionsContainer"></div>
+        <button type="button" class="addOptionBtn">+ Add Option</button>
+        <div class="errorMsg" style="display:none;color:#ff6b6b;">Select at least one correct answer.</div>
+      </div>
+    `;
+
     const typeSelect = q.querySelector(".questionType");
     const optionsContainer = q.querySelector(".optionsContainer");
     const addOptionBtn = q.querySelector(".addOptionBtn");
@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const optionDiv = document.createElement("div");
       optionDiv.style = "display:flex;align-items:center;gap:6px;margin-top:5px;";
 
+      // ✅ FIXED: use backticks again for the HTML string
       optionDiv.innerHTML = `
         <input type="${type === "multiple" ? "checkbox" : "radio"}"
           class="correctOption" name="correct-${count}" style="cursor:pointer;">
