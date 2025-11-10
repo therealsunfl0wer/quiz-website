@@ -1,7 +1,6 @@
 
 const resultsList = document.getElementById('resultsList');
 const results = JSON.parse(localStorage.getItem('quizResults')) || [];
-
 const incorrectAnswers = JSON.parse(localStorage.getItem('incorrectAnswers')) || [];
 
 if (results.length === 0) {
@@ -10,11 +9,12 @@ if (results.length === 0) {
 
 results.forEach((result) => {
     const list = document.createElement('li');
-    list.textContent = `${result.title} — ${result.score}/${result.maxScore}`;
+    const date = new Date(result.date);
+    list.innerHTML = `<strong>${result.title} — ${result.score}/${result.maxScore}</strong> <br> Date & time of your attempt: <br> <small>${date.toLocaleString()}</small>`;
     resultsList.appendChild(list);
 
     const quizIncorrect = incorrectAnswers.filter(
-      (answer) => answer.quizTitle === result.title
+      (answer) => answer.attemptId === result.attemptId
     );
 
     

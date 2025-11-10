@@ -42,6 +42,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.getElementById("submit-btn").addEventListener("click", () => {
+    const attemptId = `attempt_${Date.now()}`;
+    const incorrectAttempt = [];
+
     let score = 0;
 
     quiz.questions.forEach((q, index) => {
@@ -73,15 +76,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // Add storing results to localStorage
     const results = JSON.parse(localStorage.getItem("quizResults")) || [];
     results.push({
-      quizId: quizId,
+      attemptId,
+      quizId,
       title: quiz.title,
       score,
       maxScore,
       date: new Date().toISOString(),
     });
-    localStorage.setItem("quizResults", JSON.stringify(results));
-
-  let incorrect = JSON.parse(localStorage.getItem("incorrectAnswers")) || [];
+    localStorage.setItem("quizResults", JSON.stringify(results));  
 
   // Mark correct / incorrect choices per question
   quiz.questions.forEach((q, index) => {
@@ -115,32 +117,25 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
 
-      if (!questionIsCorrect) {
-        let userAnswerText;
-        let correctAnswerText;
+const userAnswerText = selectedArr.length > 0
+  ? selectedArr.map(i => q.choices[i]).join(', ')
+  : '(no answer)';
 
-        if (selectedArr.length > 0) {
-          userAnswerText = selectedArr.map(i => q.choices[i]).join(', ');
-        } else {
-          userAnswerText = '(no answer)';
-        }
+const correctAnswerText = Array.isArray(q.correct)
+  ? q.correct.map(i => q.choices[i]).join(', ')
+  : '(no answer)';
 
-        if (Array.isArray(q.correct)) {
-          correctAnswerText = q.correct.map(i => q.choices[i]).join(', ');
-        } else {
-          correctAnswerText = '(no answer)';
-        }
 
-        incorrect.push({
-          quizId: quizId,
-          quizTitle: quiz.title,
-          question: q.text,
-          userAnswer: userAnswerText,
-          correctAnswer: correctAnswerText
-        });
-      }
-
-      localStorage.setItem("incorrectAnswers", JSON.stringify(incorrect));
+if (!questionIsCorrect) {
+  incorrectAttempt.push({
+    attemptId,
+    quizId,
+    quizTitle: quiz.title,
+    question: q.text,
+    userAnswer: userAnswerText,
+    correctAnswer: correctAnswerText,
+  });
+}
 
       // Highlight each choice label
       if (Array.isArray(q.choices)) {
@@ -165,6 +160,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     });
+
+    const incorrect = JSON.parse(localStorage.getItem("incorrectAnswers")) || [];
+    localStorage.setItem("incorrectAnswers", JSON.stringify([...incorrect, ...incorrectAttempt]));
 
     // Disable inputs after submission
     document
