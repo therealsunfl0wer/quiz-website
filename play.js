@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Check if quiz exists
   if (!quiz) {
-    document.body.innerHTML = `<h2>Quiz not found.</h2>`;
+    window.location.replace("not-found.html");
     return;
   }
 
@@ -24,19 +24,12 @@ document.addEventListener("DOMContentLoaded", () => {
     qDiv.classList.add("question");
     const inputType = q.type === "multiple" ? "checkbox" : "radio";
 
-    qDiv.innerHTML = `
-      <h3>${index + 1}. ${q.text}</h3>
-      ${q.choices
-        .map(
-          (choice, i) => `
+    qDiv.innerHTML = `<h3>${index + 1}. ${q.text}</h3>${q.choices.map((choice, i) => `
       <div class="choice-row">
         <input id="q${index}_c${i}" type="${inputType}" name="q${index}" value="${i}">
         <label for="q${index}_c${i}">${choice}</label>
       </div>
-    `,
-        )
-        .join("")}
-    `;
+      `,).join("")}`;
 
     questionsDiv.appendChild(qDiv);
   });

@@ -320,3 +320,18 @@ footer {
   margin-top: 5px;
   display: none;
 }
+
+/* Not found page */
+.not-found-message{
+  text-align: center;
+  margin-top: 100px;
+}
+.not-found-message h2{
+  font-style: italic;
+  font-size: 36pt;
+  margin-bottom: 20px;
+}
+.not-found-message p{
+  font-size: 14pt;
+  color: var(--muted);
+}
