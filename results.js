@@ -1,0 +1,36 @@
+
+const resultsList = document.getElementById('resultsList');
+const results = JSON.parse(localStorage.getItem('quizResults')) || [];
+const incorrectAnswers = JSON.parse(localStorage.getItem('incorrectAnswers')) || [];
+
+if (results.length === 0) {
+    resultsList.innerHTML = 'No completed quizzes yet.';
+}
+
+results.forEach((result) => {
+    const list = document.createElement('li');
+    const date = new Date(result.date);
+    list.innerHTML = `<strong>${result.title} — ${result.score}/${result.maxScore}</strong> <br> Date & time of your attempt: <br> <small>${date.toLocaleString()}</small>`;
+    resultsList.appendChild(list);
+
+    const quizIncorrect = incorrectAnswers.filter(
+      (answer) => answer.attemptId === result.attemptId
+    );
+
+    
+    if(quizIncorrect.length > 0) {
+        const answersContainer = document.createElement('ul');
+        quizIncorrect.forEach((answer) => {
+            const block = document.createElement('div');
+            block.className = 'stylingBlock';
+            block.innerHTML = `
+                <h3 class="question">${answer.question}</h3>
+                <p class="user-answer">Your answer: ${answer.userAnswer}</p>
+                <p class="correct-answer">Correct answer: ${answer.correctAnswer}</p>
+            `;
+            answersContainer.appendChild(block);
+        })
+        resultsList.appendChild(answersContainer);
+    } 
+}); 
+

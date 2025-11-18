@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <title>Manage page</title>
+</head>
+<body>
+  <div class="topbar">
+    <a href="index.html">Home</a>
+    <a href="create.html">Create</a>
+    <a href="results.html">Results</a>
+    <a href="manage.html">Manage</a>
+  </div>
+
+  <main>
+    <div id="testsListContainer">
+      <h2>My quizzes</h2>
+      <ul id="localstorageTestsList"></ul>
+    </div>
+
+    <div style="margin-top: 20px; text-align: center">
+      <button
+        type="button"
+        onclick="history.back()"
+        style="
+          background: #ff6b6b;
+          border: none;
+          padding: 8px 15px;
+          border-radius: 6px;
+          font-weight: bold;
+          cursor: pointer;
+          color: black;
+        "
+      >
+        ← Back
+      </button>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      © 2025 <strong>The Awesome Quiz Website.</strong> All rights reserved.
+    </p>
+  </footer>
+
+  <script src="manage.js"></script>
+</body>
+</html>
