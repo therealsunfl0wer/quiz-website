@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Quiz</title>
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+  <div class="topbar">
+      <a href="index.html">Home</a>
+      <a href="create.html">Create</a>
+      <a href="results.html">Results</a>
+      <a href="manage.html">Manage</a>
+    </div>
+    <h1 style="text-align: center; color: #ffffff">Create a New Quiz</h1>
+
+    <form
+      id="quizForm"
+      style="
+        max-width: 900px;
+        margin: 0 auto;
+        background: #212424;
+        padding: 20px;
+        border-radius: 10px;
+      "
+    >
+      <div style="margin-bottom: 15px">
+        <label style="color: #ffffff">Quiz Title:</label>
+        <input
+          type="text"
+          id="quizTitle"
+          required
+          style="
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 6px;
+            background: #3a3a3a;
+            color: #fff;
+          "
+        />
+      </div>
+
+      <div style="margin-bottom: 15px">
+        <label style="color: #ffffff">Description:</label>
+        <textarea
+          id="quizDescription"
+          required
+          style="
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 6px;
+            background: #3a3a3a;
+            color: #fff;
+          "
+        ></textarea>
+      </div>
+
+      <h3 style="color: #ffffff">Questions</h3>
+      <div id="questionsContainer"></div>
+
+      <div style="margin-top: 15px; text-align: center">
+        <button
+          type="button"
+          id="addQuestionBtn"
+          style="
+            background: #70ff98;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+          "
+        >
+          + Add Question
+        </button>
+        <button
+          type="submit"
+          style="
+            background: #ffcc70;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+          "
+        >
+          Save Quiz
+        </button>
+      </div>
+    </form>
+    <div style="margin-top: 20px; text-align: center">
+      <button
+        type="button"
+        onclick="history.back()"
+        style="
+          background: #ff6b6b;
+          border: none;
+          padding: 8px 15px;
+          border-radius: 6px;
+          font-weight: bold;
+          cursor: pointer;
+          color: black;
+        "
+      >
+        ← Back
+      </button>
+    </div>
+
+    <script src="create.js"></script>
+  </body>
+</html>
