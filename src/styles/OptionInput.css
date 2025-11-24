@@ -1,0 +1,28 @@
+.option-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 5px;
+}
+
+.correct-checkbox {
+  cursor: pointer;
+}
+
+.option-text-input {
+  flex: 1;
+  padding: 5px;
+  background: #3a3a3a;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.remove-option-btn {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 2px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+}

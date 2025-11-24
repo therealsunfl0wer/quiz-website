@@ -1,4 +1,8 @@
-import "./App.css";
+import { Link } from "react-router-dom";
+import "/src/styles/App.css";
+import Create from "/src/Create";
+import Results from "/src/Results.jsx";
+import Manage from "/src/Manage.jsx";
 
 function Home() {
   return (
@@ -13,10 +17,10 @@ function Home() {
             one. You can also see your results or manage all quizzes. Use all
             your knowledge and imagination!
           </p>
-          <img src="src/assets/favicon.png" class="logo" />
+          <img src="src/assets/favicon.png" class="logo-home" />
         </div>
 
-        <div class="layout">
+        <div class="quizzes-container">
           <div class="panel">
             <p>
               <strong>My quizzes</strong>
@@ -29,15 +33,15 @@ function Home() {
               <strong>Other options</strong>
             </p>
             <div class="other-button">
-              <a href="results.html">
+              <Link to={Results}>
                 <button>My results</button>
-              </a>
-              <a href="manage.html">
+              </Link>
+              <Link to={Manage}>
                 <button>Manage quizzes</button>
-              </a>
-              <a href="create.html">
+              </Link>
+              <Link to={Create}>
                 <button>Create a new quiz</button>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 body {
   flex: 1;
-  font-family: "Segoe UI", sans-serif;
+  font-family: "Segoe UI", "Cantarell", sans-serif;
   font-size: 14pt;
   margin: 0;
   padding: 0;
@@ -219,7 +219,7 @@ label.choice-wrong {
   margin-right: 20px;
 }
 
-.layout {
+.quizzes-container {
   display: flex;
   gap: 20px;
   align-items: center;
@@ -312,12 +312,18 @@ label.choice-wrong {
 }
 
 .logo {
+  text-align: inherit;
+  width: 24px;
+  border-radius: 20%;
+  display: inline-block;
+}
+
+.logo-home {
   width: 85px;
   height: 85px;
-  border-radius: 12px;
+  border-radius: 20%;
   margin-top: 25px;
   margin-right: 20px;
-  display: fixed;
 }
 
 main {
@@ -410,7 +416,7 @@ footer {
 
 /* Footer adjustments so it doesn't cover content on small screens */
 @media (max-width: 600px) {
-  .layout {
+  .quizzes-container {
     flex-direction: column;
   }
   .sidebar {
