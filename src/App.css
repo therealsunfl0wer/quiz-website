@@ -1,42 +1,443 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+body {
+  flex: 1;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 14pt;
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Quiz header */
+#quiz-title {
+  text-align: center;
+  margin-top: 20px;
+}
+/* Test description styling */
+#quiz-description {
+  text-align: center;
+  margin: 6px 20px 18px;
+  color: #ddd;
+}
+
+/* Question container */
+.question {
+  margin: 20px;
+  padding: 10px;
+  border-radius: 6px;
+  background: var(--panel);
+}
+.question.correct {
+  border-left: 4px solid rgba(0, 200, 0, 0.7);
+  padding-left: 8px;
+  background: rgba(0, 200, 0, 0.03);
+}
+.question.incorrect {
+  border-left: 4px solid rgba(200, 0, 0, 0.7);
+  padding-left: 8px;
+  background: rgba(200, 0, 0, 0.02);
+}
+/* Partial correct (some correct selected in multi-select) */
+.question.partial {
+  border-left: 4px solid rgba(255, 200, 0, 0.9);
+  padding-left: 8px;
+  background: rgba(255, 200, 0, 0.04);
+}
+
+/* Submit button */
+#submit-btn {
+  background: var(--primary);
+  color: var(--text);
+  border: none;
+  padding: 10px 20px;
+  margin-left: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+/* Choice-row */
+
+.choice-row {
+  display: block;
+  margin: 8px 0;
+}
+.choice-row input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.choice-row label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: #9c9c9cc6;
+  color: var(--text);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.12s, transform 0.06s, box-shadow 0.12s;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+}
+
+/* visual radio/checkbox indicator on the left */
+.choice-row label::before {
+  content: "";
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  background: transparent;
+}
+
+/* If input is checkbox, make it square */
+.choice-row input[type="checkbox"] + label::before {
+  border-radius: 4px;
+}
+
+/* Hover & keyboard focus */
+.choice-row label:hover,
+.choice-row input:focus + label,
+.choice-row input:focus-visible + label {
+  background: var(--muted-2);
+  transform: translateY(-1px);
+}
+
+/* Checked / selected styling */
+.choice-row input:checked + label {
+  background: var(--primary);
+  color: var(--text);
+  box-shadow: 0 4px 10px rgba(40, 167, 69, 0.18);
+}
+.choice-row input:checked + label::before {
+  background: var(--text);
+  border-color: var(--text);
+}
+
+.question .choice-row {
+  max-width: 100%;
+}
+/* Ensure selected-but-wrong overrides the checked green state */
+.question .choice-row input:checked + label.choice-wrong,
+.question .choice-row input:checked + label.choice-wrong::before {
+  background: rgba(200, 0, 0, 0.8);
+  border-color: rgba(200, 0, 0, 0.22);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(200, 0, 0, 0.12);
+}
+
+/* Selected and correct should also have a clear visual (overrides green if needed) */
+.question .choice-row input:checked + label.choice-chosen-correct,
+.question .choice-row input:checked + label.choice-chosen-correct::before {
+  background: rgba(0, 180, 0, 0.8);
+  border-color: rgba(0, 150, 0, 0.25);
+  color: var(--text);
+}
+
+/* Disabled */
+.choice-row input:disabled:not(:checked) + label {
+  opacity: 0.6;
+}
+.choice-row input:disabled + label {
+  cursor: not-allowed;
+}
+.question .choice-row input:disabled + label.choice-wrong,
+.question .choice-row input:disabled + label.choice-chosen-correct,
+.question .choice-row input:disabled + label.choice-correct {
+  opacity: 1;
+}
+
+/* Persistent selected class */
+.choice-row label.selected {
+  opacity: 1;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+.choice-row label.selected::before {
+  transform: scale(1.02);
+}
+.choice-row label.selected.choice-wrong {
+  box-shadow: 0 4px 12px rgba(200, 0, 0, 0.14);
+}
+.choice-row label.selected.choice-chosen-correct {
+  box-shadow: 0 4px 12px rgba(0, 150, 0, 0.12);
+}
+
+.question
+  .choice-row
+  label.selected:not(.choice-wrong):not(.choice-chosen-correct) {
+  background: var(--primary);
+  color: var(--text);
+  box-shadow: 0 4px 10px rgba(40, 167, 69, 0.18);
+}
+.question
+  .choice-row
+  label.selected:not(.choice-wrong):not(.choice-chosen-correct)::before {
+  background: var(--text);
+  border-color: var(--text);
+}
+
+/* Correct / wrong highlights */
+.choice-row label.choice-correct,
+label.choice-correct {
+  background: rgba(0, 150, 0, 0.06);
+  border: 1px solid rgba(0, 150, 0, 0.12);
+}
+.choice-row label.choice-chosen-correct {
+  background: rgba(0, 180, 0, 0.1);
+  border: 1px solid rgba(0, 150, 0, 0.18);
+  box-shadow: 0 2px 6px rgba(0, 150, 0, 0.04);
+}
+.choice-row label.choice-wrong,
+label.choice-wrong {
+  background: rgba(200, 0, 0, 0.14);
+  border: 1px solid rgba(200, 0, 0, 0.22);
+  color: #fff0f0;
+  box-shadow: 0 2px 6px rgba(200, 0, 0, 0.06);
+}
+
+/* Small responsive tweak */
+@media (max-width: 600px) {
+  .choice-row label {
+    display: block;
+  }
+}
+
+/* ---- Index page layout ---- */
+.topbar {
+  background: var(--panel);
+  padding: 10px 16px;
+  color: var(--text);
+}
+.topbar a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  margin-right: 20px;
+}
+
+.layout {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 75px;
+}
+
+.panel {
+  width: 320px;
+  height: 335px;
+  background: #212424;
+  padding: 14px;
+  border-radius: 25px;
+  overflow-y: auto;
+}
+.panel p {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 15pt;
+}
+.panel ul {
+  padding: 0;
+  margin: 0 0 12px;
+  list-style: none;
+}
+.panel li {
+  margin: 8px 0;
+}
+.panel a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.other-panel {
+  width: 600px;
+  height: 335px;
+  background: #212424;
+  padding: 14px;
+  border-radius: 25px;
+  margin-left: 50px;
+}
+.other-panel p {
+  margin: 0 0 8px;
+  color: var(--muted);
+  margin-bottom: 50px;
+  font-size: 15pt;
+}
+
+.other-button button {
+  appearance: none;
+  border: none;
+  background: var(--primary);
+  color: var(--text);
+  padding: 8px 10px;
+  border-radius: 25px;
+  cursor: pointer;
+  width: 80%;
+  height: 50px;
+  margin-bottom: 20px;
+  font-size: 13pt;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  background: transparent;
+  text-align: center;
+}
+.header h1 {
+  margin-top: 30px;
+  font-size: 22pt;
+  margin-right: 50px;
+  margin-left: 50px;
+}
+.header p {
+  color: var(--muted);
+  margin-right: 40px;
+  margin-left: 10px;
+  background: #212424;
+  border-radius: 12px;
+  margin-top: 25px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  width: 85px;
+  height: 85px;
+  border-radius: 12px;
+  margin-top: 25px;
+  margin-right: 20px;
+  display: fixed;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+main {
+  flex: 1;
+  box-sizing: border-box;
+}
+
+footer {
+  margin-top: 60px;
+  padding: 14px 20px;
+  font-size: 12pt;
+  color: var(--muted);
+  position: fixed;
+}
+
+/* Quiz list links */
+#quizList a {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  text-decoration: none;
+}
+#quizList a:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+#resultsList {
+  padding: 0;
+  margin: 0;
+}
+#resultsList > li {
+  background: var(--panel);
+  margin: 16px 0;
+  padding: 16px;
+  border-radius: 8px;
+  list-style: none;
+}
+#resultsList > li:first-child {
+  margin-top: 0;
+}
+#resultsList ul {
+  margin: 12px 0 0;
+  padding: 0;
+}
+
+#resultsList p {
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 6px;
+}
+
+.stylingBlock {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 14px;
+  margin-left: 200px;
+  margin-right: 200px;
+  border-radius: 8px;
+}
+
+.user-answer {
+  background: rgba(200, 0, 0, 0.14);
+  border: 1px solid rgba(200, 0, 0, 0.22);
+  color: #fff0f0;
+}
+
+.correct-answer {
+  background: rgba(0, 150, 0, 0.06);
+  border: 1px solid rgba(0, 150, 0, 0.12);
+  color: #f0fff0;
+}
+
+.question {
+  color: var(--text);
+  font-size: 16px;
+  margin: 20px 0 10px 0;
+  font-weight: bold;
+}
+.quiz-title {
+  font-size: 18pt;
+  color: var(--text);
+  margin: 0 0 8px;
+}
+.quiz-score {
+  font-size: 14pt;
+  color: #ddd;
+}
+
+/* Footer adjustments so it doesn't cover content on small screens */
+@media (max-width: 600px) {
+  .layout {
+    flex-direction: column;
   }
-  to {
-    transform: rotate(360deg);
+  .sidebar {
+    width: auto;
+  }
+  footer {
+    position: static;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.errorMsg {
+  color: #ff6b6b;
+  margin-top: 5px;
+  display: none;
 }
 
-.card {
-  padding: 2em;
+/* Not found page */
+.not-found-message {
+  text-align: center;
+  margin-top: 100px;
 }
-
-.read-the-docs {
-  color: #888;
+.not-found-message h2 {
+  font-style: italic;
+  font-size: 36pt;
+  margin-bottom: 20px;
+}
+.not-found-message p {
+  font-size: 14pt;
+  color: var(--muted);
 }
