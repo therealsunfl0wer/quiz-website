@@ -24,7 +24,7 @@ function Create() {
 
   const updateQuestion = (id, updated) => {
     setQuestions((prev) =>
-      prev.map((q) => (q.id === id ? { ...q, ...updated } : q))
+      prev.map((q) => (q.id === id ? { ...q, ...updated } : q)),
     );
   };
 

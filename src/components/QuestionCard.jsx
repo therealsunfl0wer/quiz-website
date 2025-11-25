@@ -77,7 +77,11 @@ export default function QuestionCard({ question, onChange, onRemove }) {
           onChange={(e) => onChange({ points: Number(e.target.value) })}
         />
 
-        <button className="remove-question-btn" type="button" onClick={onRemove}>
+        <button
+          className="remove-question-btn"
+          type="button"
+          onClick={onRemove}
+        >
           Remove
         </button>
       </div>

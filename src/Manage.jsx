@@ -11,7 +11,7 @@ function Manage() {
 
   const deleteQuiz = (indexToDelete) => {
     const updatedQuizzes = quizzes.filter(
-      (_, index) => index !== indexToDelete
+      (_, index) => index !== indexToDelete,
     );
     localStorage.setItem("quizzes", JSON.stringify(updatedQuizzes));
     setQuizzes(updatedQuizzes);
@@ -45,20 +45,20 @@ function Manage() {
   );
 
   return (
-      <main style={{ padding: "20px" }}>
-        <div id="testsListContainer">
-          <h2>My Quizzes</h2>
-          <ul id="localstorageTestsList" style={{ paddingLeft: 0 }}>
-            {quizzes.length === 0 ? (
-              <p>No saved quizzes found. Start by creating one!</p>
-            ) : (
-              quizzes.map((quiz, index) => (
-                <QuizItem key={index} quiz={quiz} index={index} />
-              ))
-            )}
-          </ul>
-        </div>
-      </main>
+    <main style={{ padding: "20px" }}>
+      <div id="testsListContainer">
+        <h2>My Quizzes</h2>
+        <ul id="localstorageTestsList" style={{ paddingLeft: 0 }}>
+          {quizzes.length === 0 ? (
+            <p>No saved quizzes found. Start by creating one!</p>
+          ) : (
+            quizzes.map((quiz, index) => (
+              <QuizItem key={index} quiz={quiz} index={index} />
+            ))
+          )}
+        </ul>
+      </div>
+    </main>
   );
 }
 

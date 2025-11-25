@@ -20,7 +20,7 @@ const ResultAttempt = ({ result, incorrectAnswers }) => {
   const date = new Date(result.date);
 
   const quizIncorrect = incorrectAnswers.filter(
-    (answer) => answer.attemptId === result.attemptId
+    (answer) => answer.attemptId === result.attemptId,
   );
 
   return (
