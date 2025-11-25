@@ -25,7 +25,9 @@ const ResultAttempt = ({ result, incorrectAnswers }) => {
 
   return (
     <li className="quiz-list-item" style={{ marginBottom: "30px" }}>
-      <div className="quiz-title">**{result.title}**</div>
+      <div className="quiz-title">
+        <b>{result.title}</b>
+      </div>
       <div className="quiz-score" style={{ marginBottom: "10px" }}>
         Score: {result.score}/{result.maxScore}
       </div>
