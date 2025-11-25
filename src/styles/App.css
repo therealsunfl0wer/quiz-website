@@ -447,3 +447,43 @@ footer {
   font-size: 14pt;
   color: var(--muted);
 }
+
+.primary-button {
+  appearance: none;
+  border: none;
+  background: var(--primary);
+  color: var(--text);
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.primary-button:hover {
+  background: var(--primary-dark);
+}
+
+.secondary-button {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.secondary-button:hover {
+  opacity: 0.8;
+}
+
+.quiz-list-item {
+  list-style: none;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  background: #2a2a2a;
+}

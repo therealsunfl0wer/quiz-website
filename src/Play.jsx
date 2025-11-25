@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import PlayQuestionCard from "/src/components/PlayQuestionCard.jsx";
+import "/src/styles/App.css";
 
 function Play() {
   const [search] = useSearchParams();
@@ -166,43 +168,18 @@ function Play() {
       <p>{quiz.description}</p>
 
       <div id="questions">
-        {quiz.questions.map((q, index) => {
-          const inputType = q.type === "multiple" ? "checkbox" : "radio";
-
-          return (
-            <div
-              key={index}
-              className={`question ${getQuestionStatus(q, index)}`}
-            >
-              <h3>
-                {index + 1}. {q.text}
-              </h3>
-
-              {q.choices.map((choice, i) => {
-                const inputId = `q${index}-choice${i}`;
-
-                return (
-                  <div className="choice-row" key={i}>
-                    <input
-                      type={inputType}
-                      name={`q${index}`}
-                      id={inputId}
-                      disabled={submitted}
-                      checked={(answers[index] || []).includes(i)}
-                      onChange={() => handleChange(index, i, q.type)}
-                    />
-                    <label
-                      htmlFor={inputId}
-                      className={getChoiceClass(q, index, i)}
-                    >
-                      {choice}
-                    </label>
-                  </div>
-                );
-              })}
-            </div>
-          );
-        })}
+        {quiz.questions.map((q, index) => (
+          <PlayQuestionCard
+            key={index}
+            q={q}
+            index={index}
+            answers={answers}
+            submitted={submitted}
+            handleChange={handleChange}
+            getQuestionStatus={getQuestionStatus}
+            getChoiceClass={getChoiceClass}
+          />
+        ))}
       </div>
 
       {!submitted && (

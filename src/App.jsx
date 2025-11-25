@@ -5,8 +5,8 @@ import Create from "./Create";
 import Results from "./Results";
 import Manage from "./Manage";
 import Footer from "./components/Footer";
-import "/src/styles/App.css";
 import Play from "./Play";
+import "/src/styles/App.css";
 
 function App() {
   return (
