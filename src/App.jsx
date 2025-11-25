@@ -6,6 +6,7 @@ import Results from "./Results";
 import Manage from "./Manage";
 import Footer from "./components/Footer";
 import "/src/styles/App.css";
+import Play from "./Play";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/create" element={<Create />} />
           <Route path="/results" element={<Results />} />
           <Route path="/manage" element={<Manage />} />
+          <Route path="/play" element={<Play />} />
         </Routes>
         <Footer />
       </BrowserRouter>

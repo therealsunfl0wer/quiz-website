@@ -31,6 +31,13 @@
   border-radius: 6px;
   color: #fff;
 }
+.textarea-input {
+  min-height: 80px;
+  max-height: 250px;
+  resize: none;
+  overflow: auto;
+}
+
 
 .questions-header {
   margin-top: 20px;

@@ -1,14 +1,39 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "/src/styles/App.css";
-import Create from "/src/Create";
-import Results from "/src/Results.jsx";
-import Manage from "/src/Manage.jsx";
 
 function Home() {
+  const [quizzes, setQuizzes] = useState([]);
+
+  useEffect(() => {
+    async function loadInitialQuizzes() {
+      let stored = null;
+
+      try {
+        stored = JSON.parse(localStorage.getItem("quizzes"));
+      } catch {
+        stored = null;
+      }
+
+      if (Array.isArray(stored) && stored.length > 0) {
+        setQuizzes(stored);
+        return;
+      }
+
+      const res = await fetch("/src/data/initialQuizzes.json");
+      const data = await res.json();
+
+      localStorage.setItem("quizzes", JSON.stringify(data));
+      setQuizzes(data);
+    }
+
+    loadInitialQuizzes();
+  }, []);
+
   return (
     <>
       <main>
-        <div class="header">
+        <div className="header">
           <h1>
             Welcome to <strong>The Awesome Quiz Website</strong>
           </h1>
@@ -17,29 +42,35 @@ function Home() {
             one. You can also see your results or manage all quizzes. Use all
             your knowledge and imagination!
           </p>
-          <img src="src/assets/favicon.png" class="logo-home" />
+          <img src="src/assets/favicon.png" className="logo-home" />
         </div>
 
-        <div class="quizzes-container">
-          <div class="panel">
+        <div className="quizzes-container">
+          <div className="panel">
             <p>
               <strong>My quizzes</strong>
             </p>
-            <ul id="quizList"></ul>
+            <ul className="quiz-list">
+              {quizzes.map((quiz) => (
+                <li key={quiz.id}>
+                  <Link to={`/play?id=${quiz.id}`}>{quiz.title}</Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          <div class="other-panel">
+          <div className="other-panel">
             <p>
               <strong>Other options</strong>
             </p>
-            <div class="other-button">
-              <Link to={Results}>
+            <div className="other-button">
+              <Link to="/results">
                 <button>My results</button>
               </Link>
-              <Link to={Manage}>
+              <Link to="/manage">
                 <button>Manage quizzes</button>
               </Link>
-              <Link to={Create}>
+              <Link to="/create">
                 <button>Create a new quiz</button>
               </Link>
             </div>
