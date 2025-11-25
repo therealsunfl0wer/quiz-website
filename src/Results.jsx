@@ -20,7 +20,7 @@ const ResultAttempt = ({ result, incorrectAnswers }) => {
   const date = new Date(result.date);
 
   const quizIncorrect = incorrectAnswers.filter(
-    (answer) => answer.attemptId === result.attemptId
+    (answer) => answer.attemptId === result.attemptId,
   );
 
   return (
@@ -93,30 +93,30 @@ function Results() {
   }
 
   return (
-      <main className="content" style={{ padding: "20px" }}>
-        <h1>Your Results History</h1>
-        <p style={{ fontStyle: "italic", color: "#ccc" }}>
-          Here you can review your past performance and mistakes.
-        </p>
+    <main className="content" style={{ padding: "20px" }}>
+      <h1>Your Results History</h1>
+      <p style={{ fontStyle: "italic", color: "#ccc" }}>
+        Here you can review your past performance and mistakes.
+      </p>
 
-        <ul
-          id="resultsList"
-          className="results-container"
-          style={{ paddingLeft: 0 }}
-        >
-          {results.length === 0 ? (
-            <p style={{ marginTop: "20px" }}>No completed quizzes yet.</p>
-          ) : (
-            results.map((result, index) => (
-              <ResultAttempt
-                key={index}
-                result={result}
-                incorrectAnswers={incorrectAnswers}
-              />
-            ))
-          )}
-        </ul>
-      </main>
+      <ul
+        id="resultsList"
+        className="results-container"
+        style={{ paddingLeft: 0 }}
+      >
+        {results.length === 0 ? (
+          <p style={{ marginTop: "20px" }}>No completed quizzes yet.</p>
+        ) : (
+          results.map((result, index) => (
+            <ResultAttempt
+              key={index}
+              result={result}
+              incorrectAnswers={incorrectAnswers}
+            />
+          ))
+        )}
+      </ul>
+    </main>
   );
 }
 

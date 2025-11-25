@@ -115,7 +115,7 @@ function Play() {
       JSON.parse(localStorage.getItem("incorrectAnswers")) || [];
     localStorage.setItem(
       "incorrectAnswers",
-      JSON.stringify([...incorrect, ...incorrectAttempt])
+      JSON.stringify([...incorrect, ...incorrectAttempt]),
     );
 
     setScoreData({ score, maxScore });

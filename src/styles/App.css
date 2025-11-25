@@ -77,7 +77,10 @@ body {
   color: var(--text);
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.12s, transform 0.06s, box-shadow 0.12s;
+  transition:
+    background 0.12s,
+    transform 0.06s,
+    box-shadow 0.12s;
   width: 100%;
   box-sizing: border-box;
   overflow-wrap: break-word;
