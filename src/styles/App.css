@@ -1,3 +1,50 @@
+/* =======================================
+   1. CATPPUCCIN MACCHIATO PALETTE
+   ======================================= */
+:root {
+  /* Catppuccin Macchiato Color Definitions */
+  --Rosewater: #f4dbd6;
+  --Flamingo: #f0c6c6;
+  --Pink: #f5bde6;
+  --Mauve: #c6a0f6;
+  --Red: #ed8796;
+  --Maroon: #ee99a0;
+  --Peach: #f5a97f;
+  --Yellow: #eed49f;
+  --Green: #a6da95;
+  --Teal: #8bd5ca;
+  --Sky: #91d7e3;
+  --Sapphire: #7dc4e4;
+  --Blue: #8aadf4;
+  --Lavender: #b7bdf8;
+  --Text: #cad3f5;
+  --Subtext1: #b8c0e0;
+  --Subtext0: #a5adcb;
+  --Overlay2: #939ab7;
+  --Overlay1: #8087a2;
+  --Overlay0: #6e738d;
+  --Surface2: #5b6078;
+  --Surface1: #494d64;
+  --Surface0: #363a4f;
+  --Base: #24273a;
+  --Mantle: #1e2030;
+  --Crust: #181926;
+
+  /* Mappings to global variables */
+  --bg: var(--Base);
+  --panel: var(--Surface0); /* Used for main content panels */
+  --text: var(--Text);
+  --muted: var(--Subtext0);
+  --muted-2: var(--Surface1); /* Slightly lighter panel for choice hover */
+  --primary: var(--Mauve);
+  --primary-dark: #9f7fc9; /* Slightly darker Mauve for hover */
+  --error: var(--Red);
+  --primary-text: var(--Crust);
+}
+
+/* =======================================
+   2. GLOBAL STYLES
+   ======================================= */
 body {
   flex: 1;
   font-family: "Segoe UI", "Cantarell", sans-serif;
@@ -8,6 +55,22 @@ body {
   color: var(--text);
 }
 
+main {
+  flex: 1;
+  box-sizing: border-box;
+}
+
+footer {
+  margin-top: 60px;
+  padding: 14px 20px;
+  font-size: 12pt;
+  color: var(--muted);
+  position: fixed;
+}
+
+/* =======================================
+   3. TYPOGRAPHY & TEXT STYLES
+   ======================================= */
 /* Quiz header */
 #quiz-title {
   text-align: center;
@@ -17,8 +80,12 @@ body {
 #quiz-description {
   text-align: center;
   margin: 6px 20px 18px;
-  color: #ddd;
+  color: var(--Subtext1);
 }
+
+/* =======================================
+   4. QUIZ INTERACTION & RESULT STYLES
+   ======================================= */
 
 /* Question container */
 .question {
@@ -28,26 +95,25 @@ body {
   background: var(--panel);
 }
 .question.correct {
-  border-left: 4px solid rgba(0, 200, 0, 0.7);
+  border-left: 4px solid var(--Green);
   padding-left: 8px;
-  background: rgba(0, 200, 0, 0.03);
+  background: rgba(166, 218, 149, 0.08); /* Green tint */
 }
 .question.incorrect {
-  border-left: 4px solid rgba(200, 0, 0, 0.7);
+  border-left: 4px solid var(--Red);
   padding-left: 8px;
-  background: rgba(200, 0, 0, 0.02);
+  background: rgba(237, 135, 150, 0.08); /* Red tint */
 }
 /* Partial correct (some correct selected in multi-select) */
 .question.partial {
-  border-left: 4px solid rgba(255, 200, 0, 0.9);
+  border-left: 4px solid var(--Yellow);
   padding-left: 8px;
-  background: rgba(255, 200, 0, 0.04);
+  background: rgba(238, 212, 159, 0.08); /* Yellow tint */
 }
 
-/* Submit button */
 #submit-btn {
   background: var(--primary);
-  color: var(--text);
+  color: var(--primary-text);
   border: none;
   padding: 10px 20px;
   margin-left: 20px;
@@ -57,7 +123,6 @@ body {
 }
 
 /* Choice-row */
-
 .choice-row {
   display: block;
   margin: 8px 0;
@@ -73,7 +138,8 @@ body {
   align-items: center;
   gap: 12px;
   padding: 10px 12px;
-  background: #9c9c9cc6;
+  background: var(--Surface0);
+  border: 1px solid var(--Crust);
   color: var(--text);
   border-radius: 8px;
   cursor: pointer;
@@ -90,11 +156,11 @@ body {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.18);
+  border: 2px solid var(--Subtext1);
   background: transparent;
 }
 
-/* If input is checkbox, make it square */
+/* Apply square style for multi-select (checkbox) */
 .choice-row input[type="checkbox"] + label::before {
   border-radius: 4px;
 }
@@ -103,19 +169,19 @@ body {
 .choice-row label:hover,
 .choice-row input:focus + label,
 .choice-row input:focus-visible + label {
-  background: var(--muted-2);
+  background: var(--primary-dark);
   transform: translateY(-1px);
 }
 
-/* Checked / selected styling */
+/* Selection State (Checked) */
 .choice-row input:checked + label {
   background: var(--primary);
-  color: var(--text);
-  box-shadow: 0 4px 10px rgba(40, 167, 69, 0.18);
+  color: var(--primary-text);
+  box-shadow: 0 4px 10px rgba(198, 160, 246, 0.25);
 }
 .choice-row input:checked + label::before {
-  background: var(--text);
-  border-color: var(--text);
+  background: var(--primary-text);
+  border-color: var(--primary-text);
 }
 
 .question .choice-row {
@@ -124,18 +190,18 @@ body {
 /* Ensure selected-but-wrong overrides the checked green state */
 .question .choice-row input:checked + label.choice-wrong,
 .question .choice-row input:checked + label.choice-wrong::before {
-  background: rgba(200, 0, 0, 0.8);
-  border-color: rgba(200, 0, 0, 0.22);
-  color: #fff;
-  box-shadow: 0 4px 10px rgba(200, 0, 0, 0.12);
+  background: var(--Red);
+  border-color: var(--Red);
+  color: var(--Crust);
+  box-shadow: 0 4px 10px rgba(237, 135, 150, 0.2);
 }
 
 /* Selected and correct should also have a clear visual (overrides green if needed) */
 .question .choice-row input:checked + label.choice-chosen-correct,
 .question .choice-row input:checked + label.choice-chosen-correct::before {
-  background: rgba(0, 180, 0, 0.8);
-  border-color: rgba(0, 150, 0, 0.25);
-  color: var(--text);
+  background: var(--Green);
+  border-color: var(--Green);
+  color: var(--Crust);
 }
 
 /* Disabled */
@@ -160,43 +226,43 @@ body {
   transform: scale(1.02);
 }
 .choice-row label.selected.choice-wrong {
-  box-shadow: 0 4px 12px rgba(200, 0, 0, 0.14);
+  box-shadow: 0 4px 12px rgba(237, 135, 150, 0.2);
 }
 .choice-row label.selected.choice-chosen-correct {
-  box-shadow: 0 4px 12px rgba(0, 150, 0, 0.12);
+  box-shadow: 0 4px 12px rgba(166, 218, 149, 0.2);
 }
 
 .question
   .choice-row
   label.selected:not(.choice-wrong):not(.choice-chosen-correct) {
   background: var(--primary);
-  color: var(--text);
-  box-shadow: 0 4px 10px rgba(40, 167, 69, 0.18);
+  color: var(--primary-text);
+  box-shadow: 0 4px 10px rgba(198, 160, 246, 0.25);
 }
 .question
   .choice-row
   label.selected:not(.choice-wrong):not(.choice-chosen-correct)::before {
-  background: var(--text);
-  border-color: var(--text);
+  background: var(--primary-text);
+  border-color: var(--primary-text);
 }
 
 /* Correct / wrong highlights */
 .choice-row label.choice-correct,
 label.choice-correct {
-  background: rgba(0, 150, 0, 0.06);
-  border: 1px solid rgba(0, 150, 0, 0.12);
+  background: rgba(166, 218, 149, 0.1);
+  border: 1px solid var(--Green);
 }
 .choice-row label.choice-chosen-correct {
-  background: rgba(0, 180, 0, 0.1);
-  border: 1px solid rgba(0, 150, 0, 0.18);
-  box-shadow: 0 2px 6px rgba(0, 150, 0, 0.04);
+  background: rgba(166, 218, 149, 0.15);
+  border: 1px solid var(--Green);
+  box-shadow: 0 2px 6px rgba(166, 218, 149, 0.15);
 }
 .choice-row label.choice-wrong,
 label.choice-wrong {
-  background: rgba(200, 0, 0, 0.14);
-  border: 1px solid rgba(200, 0, 0, 0.22);
-  color: #fff0f0;
-  box-shadow: 0 2px 6px rgba(200, 0, 0, 0.06);
+  background: rgba(237, 135, 150, 0.15);
+  border: 1px solid var(--Red);
+  color: var(--Text);
+  box-shadow: 0 2px 6px rgba(237, 135, 150, 0.1);
 }
 
 /* Small responsive tweak */
@@ -206,11 +272,14 @@ label.choice-wrong {
   }
 }
 
-/* ---- Index page layout ---- */
+/* =======================================
+   5. LAYOUT & PAGE STYLES (INDEX/MANAGE/RESULTS)
+   ======================================= */
 .topbar {
   background: var(--panel);
   padding: 10px 16px;
   color: var(--text);
+  border-bottom: 1px solid var(--Crust);
 }
 .topbar a {
   color: var(--text);
@@ -232,7 +301,7 @@ label.choice-wrong {
 .panel {
   width: 320px;
   height: 335px;
-  background: #212424;
+  background: var(--panel);
   padding: 14px;
   border-radius: 25px;
   overflow-y: auto;
@@ -258,7 +327,7 @@ label.choice-wrong {
 .other-panel {
   width: 600px;
   height: 335px;
-  background: #212424;
+  background: var(--panel);
   padding: 14px;
   border-radius: 25px;
   margin-left: 50px;
@@ -274,7 +343,7 @@ label.choice-wrong {
   appearance: none;
   border: none;
   background: var(--primary);
-  color: var(--text);
+  color: var(--primary-text);
   padding: 8px 10px;
   border-radius: 25px;
   cursor: pointer;
@@ -301,7 +370,7 @@ label.choice-wrong {
   color: var(--muted);
   margin-right: 40px;
   margin-left: 10px;
-  background: #212424;
+  background: var(--panel);
   border-radius: 12px;
   margin-top: 25px;
   margin-bottom: 20px;
@@ -326,25 +395,12 @@ label.choice-wrong {
   margin-right: 20px;
 }
 
-main {
-  flex: 1;
-  box-sizing: border-box;
-}
-
-footer {
-  margin-top: 60px;
-  padding: 14px 20px;
-  font-size: 12pt;
-  color: var(--muted);
-  position: fixed;
-}
-
 /* Quiz list links */
 #quizList a {
   display: block;
   padding: 8px 10px;
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.05);
   color: var(--text);
   text-decoration: none;
 }
@@ -378,8 +434,8 @@ footer {
 }
 
 .stylingBlock {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: var(--Base);
+  border: 1px solid var(--Crust);
   padding: 14px;
   margin-left: 200px;
   margin-right: 200px;
@@ -387,15 +443,15 @@ footer {
 }
 
 .user-answer {
-  background: rgba(200, 0, 0, 0.14);
-  border: 1px solid rgba(200, 0, 0, 0.22);
-  color: #fff0f0;
+  background: rgba(237, 135, 150, 0.15); /* Red tint */
+  border: 1px solid var(--Red);
+  color: var(--Text);
 }
 
 .correct-answer {
-  background: rgba(0, 150, 0, 0.06);
-  border: 1px solid rgba(0, 150, 0, 0.12);
-  color: #f0fff0;
+  background: rgba(166, 218, 149, 0.15); /* Green tint */
+  border: 1px solid var(--Green);
+  color: var(--Text);
 }
 
 .question {
@@ -411,7 +467,7 @@ footer {
 }
 .quiz-score {
   font-size: 14pt;
-  color: #ddd;
+  color: var(--Subtext1);
 }
 
 /* Footer adjustments so it doesn't cover content on small screens */
@@ -428,7 +484,7 @@ footer {
 }
 
 .errorMsg {
-  color: #ff6b6b;
+  color: var(--Red);
   margin-top: 5px;
   display: none;
 }
@@ -448,11 +504,15 @@ footer {
   color: var(--muted);
 }
 
+/* =======================================
+   6. REUSABLE COMPONENTS
+   ======================================= */
+
 .primary-button {
   appearance: none;
   border: none;
   background: var(--primary);
-  color: var(--text);
+  color: var(--primary-text);
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
@@ -465,8 +525,8 @@ footer {
 }
 
 .secondary-button {
-  background: #ff6b6b;
-  color: white;
+  background: var(--error);
+  color: var(--text);
   border: none;
   padding: 8px 15px;
   border-radius: 6px;
@@ -482,8 +542,8 @@ footer {
 .quiz-list-item {
   list-style: none;
   margin-bottom: 15px;
-  padding: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-  background: #2a2a2a;
+  padding: 15px;
+  border: 1px solid var(--Crust);
+  border-radius: 8px;
+  background: var(--Surface0);
 }

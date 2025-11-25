@@ -25,7 +25,9 @@ const ResultAttempt = ({ result, incorrectAnswers }) => {
 
   return (
     <li className="quiz-list-item" style={{ marginBottom: "30px" }}>
-      <div className="quiz-title">**{result.title}**</div>
+      <div className="quiz-title">
+        <b>{result.title}</b>
+      </div>
       <div className="quiz-score" style={{ marginBottom: "10px" }}>
         Score: {result.score}/{result.maxScore}
       </div>
@@ -91,30 +93,30 @@ function Results() {
   }
 
   return (
-      <main className="content" style={{ padding: "20px" }}>
-        <h1>Your Results History</h1>
-        <p style={{ fontStyle: "italic", color: "#ccc" }}>
-          Here you can review your past performance and mistakes.
-        </p>
+    <main className="content" style={{ padding: "20px" }}>
+      <h1>Your Results History</h1>
+      <p style={{ fontStyle: "italic", color: "#ccc" }}>
+        Here you can review your past performance and mistakes.
+      </p>
 
-        <ul
-          id="resultsList"
-          className="results-container"
-          style={{ paddingLeft: 0 }}
-        >
-          {results.length === 0 ? (
-            <p style={{ marginTop: "20px" }}>No completed quizzes yet.</p>
-          ) : (
-            results.map((result, index) => (
-              <ResultAttempt
-                key={index}
-                result={result}
-                incorrectAnswers={incorrectAnswers}
-              />
-            ))
-          )}
-        </ul>
-      </main>
+      <ul
+        id="resultsList"
+        className="results-container"
+        style={{ paddingLeft: 0 }}
+      >
+        {results.length === 0 ? (
+          <p style={{ marginTop: "20px" }}>No completed quizzes yet.</p>
+        ) : (
+          results.map((result, index) => (
+            <ResultAttempt
+              key={index}
+              result={result}
+              incorrectAnswers={incorrectAnswers}
+            />
+          ))
+        )}
+      </ul>
+    </main>
   );
 }
 

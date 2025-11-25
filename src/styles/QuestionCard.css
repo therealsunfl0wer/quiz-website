@@ -1,5 +1,5 @@
 .question-card {
-  background: #333;
+  background: var(--Surface1);
   padding: 12px;
   margin-top: 15px;
   border-radius: 8px;
@@ -14,37 +14,37 @@
 .question-input {
   flex: 2;
   padding: 5px;
-  background: #3a3a3a;
+  background: var(--Base);
   border: none;
-  color: #fff;
+  color: var(--Text);
   border-radius: 5px;
 }
 
 .type-select {
   flex: 1;
   padding: 5px;
-  background: #3a3a3a;
+  background: var(--Base);
   border: none;
-  color: #fff;
+  color: var(--Text);
   border-radius: 5px;
 }
 
 .points-input {
   width: 60px;
   padding: 5px;
-  background: #3a3a3a;
+  background: var(--Base);
   border: none;
-  color: #fff;
+  color: var(--Text);
   border-radius: 5px;
 }
 
 .remove-question-btn {
   margin-left: auto;
-  background: #ff6b6b;
+  background: var(--Red);
   padding: 5px 10px;
   border: none;
   border-radius: 5px;
-  color: white;
+  color: var(--Text);
   cursor: pointer;
 }
 
@@ -54,9 +54,10 @@
 
 .add-option-btn {
   margin-top: 8px;
-  background: #70ff98;
+  background: var(--Green);
   padding: 5px 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  color: var(--Crust);
 }

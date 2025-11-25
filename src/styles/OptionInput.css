@@ -12,15 +12,15 @@
 .option-text-input {
   flex: 1;
   padding: 5px;
-  background: #3a3a3a;
+  background: var(--Base);
   border: none;
   border-radius: 5px;
-  color: #fff;
+  color: var(--Text);
 }
 
 .remove-option-btn {
-  background: #ff6b6b;
-  color: white;
+  background: var(--Red);
+  color: var(--Text);
   border: none;
   padding: 2px 6px;
   border-radius: 4px;

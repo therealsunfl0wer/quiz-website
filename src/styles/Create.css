@@ -4,19 +4,19 @@
 
 .page-title {
   text-align: center;
-  color: #fff;
+  color: var(--Text);
 }
 
 .quiz-form {
   max-width: 900px;
   margin: 0 auto;
-  background: #212424;
+  background: var(--panel);
   padding: 20px;
   border-radius: 10px;
 }
 
 .label {
-  color: #fff;
+  color: var(--Text);
   display: block;
   margin-top: 10px;
 }
@@ -26,10 +26,10 @@
   width: 100%;
   margin-top: 5px;
   padding: 8px;
-  background: #3a3a3a;
+  background: var(--Base);
   border: none;
   border-radius: 6px;
-  color: #fff;
+  color: var(--Text);
 }
 .textarea-input {
   min-height: 80px;
@@ -41,7 +41,7 @@
 
 .questions-header {
   margin-top: 20px;
-  color: #fff;
+  color: var(--Text);
 }
 
 .button-row {
@@ -49,8 +49,10 @@
   margin-top: 20px;
 }
 
+/* Green accent for 'Add' button */
 .add-question-btn {
-  background: #70ff98;
+  background: var(--Green);
+  color: var(--Crust);
   border: none;
   padding: 8px 15px;
   border-radius: 6px;
@@ -58,8 +60,10 @@
   cursor: pointer;
 }
 
+/* Yellow accent for 'Save' button */
 .save-quiz-btn {
-  background: #ffcc70;
+  background: var(--Yellow);
+  color: var(--Crust);
   border: none;
   padding: 8px 15px;
   border-radius: 6px;
