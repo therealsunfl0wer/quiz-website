@@ -1,0 +1,11 @@
+:root {
+  --bg: #2a2d2e;
+  --panel: #3c3f40;
+  --muted: #dfdfdf;
+  --muted-2: #777;
+  --text: #fff;
+  --primary: #078600;
+  --primary-hover: #019101;
+  --correct: rgba(0, 150, 0, 0.12);
+  --wrong: rgba(150, 0, 0, 0.12);
+}
