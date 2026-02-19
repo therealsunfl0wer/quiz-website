@@ -1,0 +1,63 @@
+.question-card {
+  background: var(--Surface1);
+  padding: 12px;
+  margin-top: 15px;
+  border-radius: 8px;
+}
+
+.question-top-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.question-input {
+  flex: 2;
+  padding: 5px;
+  background: var(--Base);
+  border: none;
+  color: var(--Text);
+  border-radius: 5px;
+}
+
+.type-select {
+  flex: 1;
+  padding: 5px;
+  background: var(--Base);
+  border: none;
+  color: var(--Text);
+  border-radius: 5px;
+}
+
+.points-input {
+  width: 60px;
+  padding: 5px;
+  background: var(--Base);
+  border: none;
+  color: var(--Text);
+  border-radius: 5px;
+}
+
+.remove-question-btn {
+  margin-left: auto;
+  background: var(--Red);
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  color: var(--Text);
+  cursor: pointer;
+}
+
+.options-section {
+  margin-top: 10px;
+}
+
+.add-option-btn {
+  margin-top: 8px;
+  background: var(--Green);
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: var(--Crust);
+}

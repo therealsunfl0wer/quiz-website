@@ -1,0 +1,72 @@
+.create-quiz-page {
+  padding: 20px;
+}
+
+.page-title {
+  text-align: center;
+  color: var(--Text);
+}
+
+.quiz-form {
+  max-width: 900px;
+  margin: 0 auto;
+  background: var(--panel);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.label {
+  color: var(--Text);
+  display: block;
+  margin-top: 10px;
+}
+
+.text-input,
+.textarea-input {
+  width: 100%;
+  margin-top: 5px;
+  padding: 8px;
+  background: var(--Base);
+  border: none;
+  border-radius: 6px;
+  color: var(--Text);
+}
+.textarea-input {
+  min-height: 80px;
+  max-height: 250px;
+  resize: none;
+  overflow: auto;
+}
+
+.questions-header {
+  margin-top: 20px;
+  color: var(--Text);
+}
+
+.button-row {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Green accent for 'Add' button */
+.add-question-btn {
+  background: var(--Green);
+  color: var(--Crust);
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Yellow accent for 'Save' button */
+.save-quiz-btn {
+  background: var(--Yellow);
+  color: var(--Crust);
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 10px;
+}
